@@ -245,6 +245,8 @@ body.dark-mode header.scrolled {
 }
 
 .logo {
+    right: 35px;
+    rotate: 15deg;
     font-size: 2.5rem;
     font-weight: 900;
     background: var(--gradient-primary);
@@ -257,9 +259,16 @@ body.dark-mode header.scrolled {
     text-shadow: 0 2px 10px rgba(106, 17, 203, 0.3);
 }
 
+.logo:hover {
+    box-shadow: var(--border-radius-xl);
+    transform: translateY(-8px) scale(1.05);
+    transition: var(--transition-medium);
+}
+
 .logo span {
     color: var(--accent-color);
     text-shadow: 0 2px 10px rgba(255, 65, 108, 0.3);
+    
 }
 
 .nav-links {
@@ -843,6 +852,290 @@ body.dark-mode .skill-card {
     opacity: 0.3;
     transform: scale(1.5);
 }
+
+
+
+/* ============================================
+   PROJECTS SECTION
+============================================ */
+.projects {
+    background-color: rgba(74, 205, 79, 0.05);
+    position: relative;
+    padding: 150px 0;
+    overflow: hidden;
+}
+
+.projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(106, 17, 203, 0.03) 50%, transparent 70%);
+    animation: shine 8s infinite linear;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.projects-container {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.project-card {
+    width: 380px;
+    height: 480px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: var(--border-radius-lg);
+    padding: 40px 35px;
+    text-align: center;
+    transition: var(--transition-medium);
+    box-shadow: var(--shadow-medium);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+body.dark-mode .project-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hover effect untuk project card */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition-medium);
+    border-radius: var(--border-radius-lg);
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-25px) rotateX(5deg) rotateY(5deg) scale(1.05);
+    box-shadow: var(--shadow-hard), 0 0 30px rgba(76, 175, 80, 0.4);
+}
+
+.project-card:hover .project-icon {
+    color: white;
+    transform: scale(1.2) rotate(15deg);
+}
+
+.project-card:hover h3 {
+    color: white;
+    transform: translateY(-5px);
+}
+
+.project-card:hover p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.project-icon {
+    font-size: 4.5rem;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: var(--transition-medium);
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.project-icon i {
+    transition: var(--transition-medium);
+}
+
+.project-card:hover .project-icon i {
+    transform: translateY(-5px);
+}
+
+.project-card h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    transition: var(--transition-medium);
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+}
+
+.project-card p {
+    opacity: 0.9;
+    font-size: 1.1rem;
+    transition: var(--transition-medium);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+.project-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    width: 100%;
+    justify-content: center;
+}
+
+.project-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    transition: var(--transition-medium);
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    min-width: 140px;
+}
+
+.live-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    color: white;
+}
+
+.github-btn {
+    background: linear-gradient(135deg, #333 0%, #000 100%);
+    color: white;
+}
+
+.python-btn {
+    background: linear-gradient(135deg, #3776AB 0%, #306998 100%);
+    color: white;
+}
+
+.project-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-btn i {
+    font-size: 1.1rem;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+.tech-tag {
+    background: rgba(106, 17, 203, 0.1);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    border: 1px solid rgba(106, 17, 203, 0.2);
+    transition: var(--transition-fast);
+}
+
+.project-card:hover .tech-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.project-decoration {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: 0.1;
+    transition: var(--transition-medium);
+}
+
+.project-card:hover .project-decoration {
+    opacity: 0.3;
+    transform: scale(1.8);
+}
+
+/* Responsive design untuk projects */
+@media (max-width: 1200px) {
+    .project-card {
+        width: 350px;
+        height: 460px;
+    }
+}
+
+@media (max-width: 992px) {
+    .projects-container {
+        gap: 40px;
+    }
+    
+    .project-card {
+        width: 320px;
+        height: 440px;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-container {
+        gap: 30px;
+    }
+    
+    .project-card {
+        width: 100%;
+        max-width: 400px;
+        height: 430px;
+    }
+    
+    .project-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .project-btn {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .project-card {
+        height: 420px;
+        padding: 30px 25px;
+    }
+    
+    .project-icon {
+        font-size: 3.5rem;
+    }
+    
+    .project-card h3 {
+        font-size: 1.8rem;
+    }
+}
+
 
 /* ============================================
    CERTIFICATES SECTION

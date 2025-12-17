@@ -998,3 +998,120 @@ function initTimeGreeting() {
 initTimeGreeting();
 
 console.log('Portfolio JavaScript loaded successfully!');
+
+
+// ============================================
+// 21. PROJECT BUTTONS INTERACTION
+// ============================================
+
+function initProjectButtons() {
+    const projectButtons = document.querySelectorAll('.project-btn');
+    
+    projectButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            const projectType = this.classList.contains('live-btn') ? 'Live Demo' :
+                              this.classList.contains('github-btn') ? 'GitHub Repository' :
+                              'Python Project';
+            
+            const projectName = this.closest('.project-card').querySelector('h3').textContent;
+            
+            // Show loading effect
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                showProjectNotification(`Membuka ${projectType} - ${projectName}`);
+            }, 800);
+            
+            // Track project clicks
+            console.log(`Project clicked: ${projectName} - ${projectType}`);
+        });
+    });
+    
+    function showProjectNotification(message) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-hard);
+            z-index: 10000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        `;
+        
+        notification.innerHTML = `
+            <i class="fas fa-rocket"></i>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 10);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.style.transform = 'translateX(120%)';
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    }
+}
+
+// Panggil function di DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // ... fungsi lainnya yang sudah ada ...
+    initProjectButtons(); // Tambahkan ini
+    
+    // Jangan lupa update navbar links
+    const navLinks = document.getElementById('navLinks');
+    navLinks.innerHTML += `<a href="#projects">Projects</a>`;
+});
+
+// ============================================
+// 22. PROJECT HOVER EFFECTS
+// ============================================
+
+function initProjectHoverEffects() {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    projectCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            // Add floating effect
+            this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            
+            // Animate tech tags
+            const techTags = this.querySelectorAll('.tech-tag');
+            techTags.forEach((tag, index) => {
+                tag.style.transitionDelay = `${index * 0.1}s`;
+                tag.style.transform = 'translateY(-5px)';
+            });
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            // Reset tech tags
+            const techTags = this.querySelectorAll('.tech-tag');
+            techTags.forEach(tag => {
+                tag.style.transform = 'translateY(0)';
+            });
+        });
+    });
+}
+
+// Panggil function
+initProjectHoverEffects();
